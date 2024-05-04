@@ -1,0 +1,179 @@
+h1, h2, h3 {
+    text-align: center;
+    color: #333;
+}
+body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
+        color: #333;
+    }
+
+.navbar {
+    background-color: #333;
+    padding: 15px 0;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.hero {
+    display: flex;
+    /*align-items: center;*/
+    padding: 100px 50px;
+    color: #fff;
+    height: 100vh; /* Fill the entire screen */
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-img {
+    width: 50%;
+    border-radius: 10px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    object-fit: cover;
+    object-position: right;
+}
+
+.hero-content {
+    max-width: 45%;
+    text-align: left;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    padding-right: 50px; /* Adjust as needed */
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    line-height: 1.3;
+    margin-bottom: 20px;
+    margin-top: 0; /* Remove top margin */
+}
+
+.get-started-btn {
+    padding: 15px 30px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px; /* Adjust as needed */
+    align-self: normal; /* Align to the start of the flex container */
+}
+
+
+.get-started-btn:hover {
+    background-color: #45a049;
+}
+
+.option {
+    margin-bottom: 20px;
+}
+.option input[type="radio"] {
+    display: none;
+}
+.option label {
+    display: block;
+    padding: 10px 15px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.option input[type="radio"]:checked + label {
+    background-color: #4CAF50;
+    color: #fff;
+}
+.upload-btn {
+    display: none;
+}
+.upload-btn-label {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.upload-btn-label:hover {
+    background-color: #45a049;
+}
+.input-field {
+    margin-bottom: 20px;
+}
+.input-field label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+.input-field input[type="text"] {
+    width: calc(100% - 32px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.btn-container {
+    text-align: center;
+}
+.btn {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.btn:hover {
+    background-color: #45a049;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.checkpoint {
+    margin: 50px auto;
+}
+
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}

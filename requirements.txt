@@ -1,0 +1,10 @@
+haystack-ai
+sentence-transformers>=2.2.0
+accelerate
+markdown-it-py
+mdit_plain
+pypdf
+gdown
+pytube
+fastapi
+uvicorn

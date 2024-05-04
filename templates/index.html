@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Know Better: Your Content Assistant</title>
+<link href="{{ url_for('static', path='styles/styles.css') }}" rel="stylesheet">
+
+<body>
+
+<header class="navbar">
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>Know Better: A very convenient way to query things you didn't know you could query!</h1>
+        <button class="get-started-btn" onclick="scrollToContainer()">Get Started</button>
+    </div>
+    <img class="hero-img" src="{{ url_for('static', path='/assets/happyTeam.jpeg')}}" alt="Hero Image">
+</section>
+
+<div id="checkpoint"></div>
+
+<div class="container" id="container">
+    <h2>Get Started</h2>
+    <div class="option">
+        <input type="radio" id="youtube" name="option" value="youtube">
+        <label for="youtube">YouTube Link</label>
+    </div>
+    <div class="option">
+        <input type="radio" id="pdf" name="option" value="pdf">
+        <label for="pdf">PDF Document</label>
+    </div>
+    <div class="option">
+        <input type="radio" id="website" name="option" value="website">
+        <label for="website">Website URL</label>
+    </div>
+
+    <div id="file-upload" class="input-field" style="display: none;">
+        <label for="file" class="upload-btn-label">Choose File</label>
+        <input type="file" id="file" class="upload-btn">
+    </div>
+
+    <div id="text-field" class="input-field" style="display: none;">
+        <label for="input"></label>
+        <input type="text" id="input" placeholder="Enter link">
+    </div>
+
+    <div class="btn-container">
+        <button id="process-btn" class="btn">Process</button>
+    </div>
+</div>
+
+<div class="container">
+    <div class="info">
+        <h3>What is Know Better?</h3>
+        <p>Know Better is an AI-powered website that provides a convenient way to query and interact with various types of data.</p>
+        <h3>How to Use:</h3>
+        <ul>
+            <li>Choose the type of data you want to process: YouTube Link, PDF Document, or Website URL.</li>
+            <li>If you select a YouTube Link or Website URL, enter the link in the provided field.</li>
+            <li>If you select a PDF Document, click on "Choose File" to upload the document.</li>
+            <li>Click on the "Process" button to start processing the selected data.</li>
+            <li>Once processed, you will be redirected to a chat interface where you can interact with your data using natural language.</li>
+        </ul>
+        <p>With Know Better, you can analyze and gain insights from your data using advanced natural language processing (NLP), language model (LLM), and Retrieval-Augmented Generation (RAG) pipelines.</p>
+    </div>
+</div>
+
+<script>
+    function scrollToContainer() {
+        document.getElementById('checkpoint').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    document.querySelectorAll('input[name="option"]').forEach((radio) => {
+        radio.addEventListener('change', (event) => {
+            if (event.target.value === 'youtube') {
+                document.getElementById('file-upload').style.display = 'none';
+                document.getElementById('text-field').style.display = 'block';
+                document.querySelector('#text-field label').textContent = "Enter Youtube Link:";
+
+            } else if (event.target.value === 'pdf' || event.target.value === 'pdf') {
+                document.getElementById('text-field').style.display = 'none';
+                document.getElementById('file-upload').style.display = 'block';
+            } else if (event.target.value === 'website' || event.target.value === 'website') {
+                document.getElementById('file-upload').style.display = 'none';
+                document.getElementById('text-field').style.display = 'block';
+                document.querySelector('#text-field label').textContent = "Enter URL:";
+            }
+
+        });
+    });
+
+    document.getElementById('process-btn').addEventListener('click', async () => {
+        const selectedOption = document.querySelector('input[name="option"]:checked');
+        if (!selectedOption) {
+            alert('Please select an option.');
+            return;
+        }
+
+        const optionValue = selectedOption.value;
+        let formData = new FormData();
+
+        if (optionValue === 'youtube') {
+            const linkInput = document.getElementById('input').value.trim();
+            if (!linkInput) {
+                alert('Please enter a YouTube link.');
+                return;
+            }
+            formData.append('option', optionValue);
+            formData.append('link', linkInput);
+        } else if (optionValue === 'pdf' || optionValue === 'pdf') {
+            const fileInput = document.getElementById('file');
+            if (fileInput.files.length === 0) {
+                alert('Please upload a file.');
+                return;
+            }
+            formData.append('option', optionValue);
+            formData.append('file', fileInput.files[0]);
+        } else if (optionValue === 'website') {
+            const linkInput = document.getElementById('input').value.trim();
+            if (!linkInput) {
+                alert('Please enter a valid url.');
+                return;
+            }
+            formData.append('option', optionValue);
+            formData.append('link', linkInput);
+        }
+
+        try {
+            const response = await fetch('http://localhost:8000/process', {
+                method: 'POST',
+                body: formData,
+            });
+            const data = await response.json();
+
+            if (response.status === 200) {
+                window.location.href = "http://localhost:8000/chat"
+            }
+            console.log(data);
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    });
+</script>
+
+<footer class="footer">
+    <p>&copy; 2024 Know Better. All rights reserved.</p>
+</footer>
+
+
+</body>
+</html>
