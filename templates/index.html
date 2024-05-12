@@ -5,15 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Know Better: Your Content Assistant</title>
 <link href="{{ url_for('static', path='styles/styles.css') }}" rel="stylesheet">
-
+<link href="{{ url_for('static', path='styles/loading.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', path='styles/bg.css') }}" rel="stylesheet">
+</head>
 <body>
-
 <header class="navbar">
     <nav>
         <ul>
-            <li><a href="#">Home</a></li>
+            <li><a href="/welcome">Home</a></li>
             <li><a href="#">About</a></li>
             <li><a href="#">Contact</a></li>
+            <li><a href="/logout">Logout</a></li>
         </ul>
     </nav>
 </header>
@@ -28,7 +30,8 @@
 
 <div id="checkpoint"></div>
 
-<div class="container" id="container">
+<div class="grid-container">
+    <div class="container" id="container">
     <h2>Get Started</h2>
     <div class="option">
         <input type="radio" id="youtube" name="option" value="youtube">
@@ -57,6 +60,10 @@
         <button id="process-btn" class="btn">Process</button>
     </div>
 </div>
+    <div class="image-container">
+        <img class="hero-img" src="{{ url_for('static', path='/assets/happyTeam.jpeg')}}" alt="Hero Image">
+    </div>
+</div>
 
 <div class="container">
     <div class="info">
@@ -73,6 +80,14 @@
         <p>With Know Better, you can analyze and gain insights from your data using advanced natural language processing (NLP), language model (LLM), and Retrieval-Augmented Generation (RAG) pipelines.</p>
     </div>
 </div>
+
+<div id="loading-overlay">
+    <div class="loader"></div>
+</div>
+
+<footer class="footer">
+    <p>&copy; 2024 Know Better. All rights reserved.</p>
+</footer>
 
 <script>
     function scrollToContainer() {
@@ -99,9 +114,13 @@
     });
 
     document.getElementById('process-btn').addEventListener('click', async () => {
+        const loadingOverlay = document.getElementById('loading-overlay');
+        loadingOverlay.style.display = 'block'; // Show loading overlay
+
         const selectedOption = document.querySelector('input[name="option"]:checked');
         if (!selectedOption) {
             alert('Please select an option.');
+            loadingOverlay.style.display = 'none'; // Hide loading overlay
             return;
         }
 
@@ -112,6 +131,7 @@
             const linkInput = document.getElementById('input').value.trim();
             if (!linkInput) {
                 alert('Please enter a YouTube link.');
+                loadingOverlay.style.display = 'none'; // Hide loading overlay
                 return;
             }
             formData.append('option', optionValue);
@@ -120,6 +140,7 @@
             const fileInput = document.getElementById('file');
             if (fileInput.files.length === 0) {
                 alert('Please upload a file.');
+                loadingOverlay.style.display = 'none'; // Hide loading overlay
                 return;
             }
             formData.append('option', optionValue);
@@ -128,6 +149,7 @@
             const linkInput = document.getElementById('input').value.trim();
             if (!linkInput) {
                 alert('Please enter a valid url.');
+                loadingOverlay.style.display = 'none'; // Hide loading overlay
                 return;
             }
             formData.append('option', optionValue);
@@ -149,12 +171,9 @@
             console.error('Error:', error);
         }
     });
+
 </script>
-
-<footer class="footer">
-    <p>&copy; 2024 Know Better. All rights reserved.</p>
-</footer>
-
+<div class="gradient"></div>
 
 </body>
 </html>

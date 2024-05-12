@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Know Better: Your Content Assistant</title>
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,600" rel="stylesheet">
+    <link href="../static/styles/try.css" rel="stylesheet">
+    <script src="https://unpkg.com/animejs@3.0.1/lib/anime.min.js"></script>
+    <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
+</head>
+<body class="is-boxed has-animations">
+    <div class="body-wrap">
+        <header class="site-header navbar">
+            <div class="container">
+                <div class="site-header-inner">
+                    <div class="brand header-brand">
+                        <h1 class="m-0">
+                            <a href="#">
+                                <img class="header-logo-image" src="../static/assets/logo.svg" alt="Logo">
+                            </a>
+                        </h1>
+                    </div>
+                    <nav>
+                        <ul>
+                            <li><a href="/welcome">Home</a></li>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Contact</a></li>
+                            <li><a href="/logout">Logout</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <section class="hero">
+                <div class="container">
+                    <div class="hero-inner">
+                        <div class="hero-content">
+                            <h1>Know Better: A very convenient way to query things you didn't know you could query!</h1>
+                            <button class="get-started-btn" onclick="scrollToContainer()">Get Started</button>
+                        </div>
+                        <img class="hero-img" src="../static/assets/happyTeam.jpeg" alt="Hero Image">
+                    </div>
+                </div>
+            </section>
+
+            <div id="checkpoint"></div>
+
+            <div class="grid-container">
+                <div class="container" id="container">
+                    <h2>Get Started</h2>
+                    <div class="option">
+                        <input type="radio" id="youtube" name="option" value="youtube">
+                        <label for="youtube">YouTube Link</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="pdf" name="option" value="pdf">
+                        <label for="pdf">PDF Document</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="website" name="option" value="website">
+                        <label for="website">Website URL</label>
+                    </div>
+
+                    <div id="file-upload" class="input-field" style="display: none;">
+                        <label for="file" class="upload-btn-label">Choose File</label>
+                        <input type="file" id="file" class="upload-btn">
+                    </div>
+
+                    <div id="text-field" class="input-field" style="display: none;">
+                        <label for="input"></label>
+                        <input type="text" id="input" placeholder="Enter link">
+                    </div>
+
+                    <div class="btn-container">
+                        <button id="process-btn" class="btn">Process</button>
+                    </div>
+                </div>
+<!--                <div class="image-container">-->
+<!--                    <img class="hero-img" src="{{ url_for('static', path='/assets/happyTeam.jpeg')}}" alt="Hero Image">-->
+<!--                </div>-->
+            </div>
+
+            <div class="container">
+                <div class="info">
+                    <h3>What is Know Better?</h3>
+                    <p>Know Better is an AI-powered website that provides a convenient way to query and interact with various types of data.</p>
+                    <h3>How to Use:</h3>
+                    <ul>
+                        <li>Choose the type of data you want to process: YouTube Link, PDF Document, or Website URL.</li>
+                        <li>If you select a YouTube Link or Website URL, enter the link in the provided field.</li>
+                        <li>If you select a PDF Document, click on "Choose File" to upload the document.</li>
+                        <li>Click on the "Process" button to start processing the selected data.</li>
+                        <li>Once processed, you will be redirected to a chat interface where you can interact with your data using natural language.</li>
+                    </ul>
+                    <p>With Know Better, you can analyze and gain insights from your data using advanced natural language processing (NLP), language model (LLM), and Retrieval-Augmented Generation (RAG) pipelines.</p>
+                </div>
+            </div>
+
+            <div id="loading-overlay">
+                <div class="loader"></div>
+            </div>
+        </main>
+
+        <footer class="site-footer footer">
+            <div class="container">
+                <div class="site-footer-inner">
+                    <div class="brand footer-brand">
+                        <a href="#">
+                            <img class="header-logo-image" src="../static/assets/logo.svg" alt="Logo">
+                        </a>
+                    </div>
+                    <ul class="footer-links list-reset">
+                        <li>
+                            <a href="#">Contact</a>
+                        </li>
+                        <li>
+                            <a href="#">About us</a>
+                        </li>
+                        <li>
+                            <a href="#">FAQ's</a>
+                        </li>
+                        <li>
+                            <a href="#">Support</a>
+                        </li>
+                    </ul>
+                    <ul class="footer-social-links list-reset">
+                        <li>
+                            <a href="#">
+                                <span class="screen-reader-text">Facebook</span>
+                                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6.023 16L6 9H3V6h3V4c0-2.7 1.672-4 4.08-4 1.153 0 2.144.086 2.433.124v2.821h-1.67c-1.31 0-1.563.623-1.563 1.536V6H13l-1 3H9.28v7H6.023z" fill="#0270D7"/>
+                                </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="screen-reader-text">Twitter</span>
+                                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M16 3c-.6.3-1.2.4-1.9.5.7-.4 1.2-1 1.4-1.8-.6.4-1.3.6-2.1.8-.6-.6-1.5-1-2.4-1-1.7 0-3.2 1.5-3.2 3.3 0 .3 0 .5.1.7-2.7-.1-5.2-1.4-6.8-3.4-.3.5-.4 1-.4 1.7 0 1.1.6 2.1 1.5 2.7-.5 0-1-.2-1.5-.4C.7 7.7 1.8 9 3.3 9.3c-.3.1-.6.1-.9.1-.2 0-.4 0-.6-.1.4 1.3 1.6 2.3 3.1 2.3-1.1.9-2.5 1.4-4.1 1.4H0c1.5.9 3.2 1.5 5 1.5 6 0 9.3-5 9.3-9.3v-.4C15 4.3 15.6 3.7 16 3z" fill="#0270D7"/>
+                                </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="screen-reader-text">Google</span>
+                                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7.9 7v2.4H12c-.2 1-1.2 3-4 3-2.4 0-4.3-2-4.3-4.4 0-2.4 2-4.4 4.3-4.4 1.4 0 2.3.6 2.8 1.1l1.9-1.8C11.5 1.7 9.9 1 8 1 4.1 1 1 4.1 1 8s3.1 7 7 7c4 0 6.7-2.8 6.7-6.8 0-.5 0-.8-.1-1.2H7.9z" fill="#0270D7"/>
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="footer-copyright">&copy; 2024 Know Better. All rights reserved.</div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function scrollToContainer() {
+            document.getElementById('checkpoint').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        document.querySelectorAll('input[name="option"]').forEach((radio) => {
+            radio.addEventListener('change', (event) => {
+                if (event.target.value === 'youtube') {
+                    document.getElementById('file-upload').style.display = 'none';
+                    document.getElementById('text-field').style.display = 'block';
+                    document.querySelector('#text-field label').textContent = "Enter Youtube Link:";
+
+                } else if (event.target.value === 'pdf' || event.target.value === 'pdf') {
+                    document.getElementById('text-field').style.display = 'none';
+                    document.getElementById('file-upload').style.display = 'block';
+                } else if (event.target.value === 'website' || event.target.value === 'website') {
+                    document.getElementById('file-upload').style.display = 'none';
+                    document.getElementById('text-field').style.display = 'block';
+                    document.querySelector('#text-field label').textContent = "Enter URL:";
+                }
+
+            });
+        });
+
+        document.getElementById('process-btn').addEventListener('click', async () => {
+            const loadingOverlay = document.getElementById('loading-overlay');
+            loadingOverlay.style.display = 'block'; // Show loading overlay
+
+            const selectedOption = document.querySelector('input[name="option"]:checked');
+            if (!selectedOption) {
+                alert('Please select an option.');
+                loadingOverlay.style.display = 'none'; // Hide loading overlay
+                return;
+            }
+
+            const optionValue = selectedOption.value;
+            let formData = new FormData();
+
+            if (optionValue === 'youtube') {
+                const linkInput = document.getElementById('input').value.trim();
+                if (!linkInput) {
+                    alert('Please enter a YouTube link.');
+                    loadingOverlay.style.display = 'none'; // Hide loading overlay
+                    return;
+                }
+                formData.append('option', optionValue);
+                formData.append('link', linkInput);
+            } else if (optionValue === 'pdf' || optionValue === 'pdf') {
+                const fileInput = document.getElementById('file');
+                if (fileInput.files.length === 0) {
+                    alert('Please upload a file.');
+                    loadingOverlay.style.display = 'none'; // Hide loading overlay
+                    return;
+                }
+                formData.append('option', optionValue);
+                formData.append('file', fileInput.files[0]);
+            } else if (optionValue === 'website') {
+                const linkInput = document.getElementById('input').value.trim();
+                if (!linkInput) {
+                    alert('Please enter a valid url.');
+                    loadingOverlay.style.display = 'none'; // Hide loading overlay
+                    return;
+                }
+                formData.append('option', optionValue);
+                formData.append('link', linkInput);
+            }
+
+            try {
+                const response = await fetch('http://localhost:8000/process', {
+                    method: 'POST',
+                    body: formData,
+                });
+                const data = await response.json();
+
+                if (response.status === 200) {
+                    window.location.href = "http://localhost:8000/chat"
+                }
+                console.log(data);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+    </script>
+</body>
+</html>

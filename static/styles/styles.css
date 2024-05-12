@@ -1,14 +1,29 @@
-h1, h2, h3 {
-    text-align: center;
-    color: #333;
+html {
+  line-height: 1.15;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
 }
+
+h1, h2, h3 {
+    font-size: 2em;
+  margin: 0.67em 0;
+    text-align: center;
+    color: #8a94a7;
+}
+
 body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         margin: 0;
         padding: 0;
-        background-color: #f0f0f0;
+        background-color: #2F1B41;
         color: #333;
-    }
+}
+
+/* This is just to transition when you change the viewport size. */
+* {
+  transition: all 0.5s ease-out;
+}
+
 
 .navbar {
     background-color: #333;
@@ -39,7 +54,7 @@ body {
 
 .hero {
     display: flex;
-    /*align-items: center;*/
+    /*align-items: ;*/
     padding: 100px 50px;
     color: #fff;
     height: 100vh; /* Fill the entire screen */
@@ -49,6 +64,7 @@ body {
 
 .hero-img {
     width: 50%;
+    height: 100vh;
     border-radius: 10px;
     position: absolute;
     top: 0;
@@ -78,8 +94,8 @@ body {
 
 .get-started-btn {
     padding: 15px 30px;
-    background-color: #4CAF50;
-    color: #fff;
+    background-color: #BE3144;
+    color: #2F1B41;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -90,7 +106,7 @@ body {
 
 
 .get-started-btn:hover {
-    background-color: #45a049;
+    background-color: #872341;
 }
 
 .option {
@@ -146,7 +162,7 @@ body {
 }
 .btn {
     padding: 10px 20px;
-    background-color: #4CAF50;
+    background-color: #635985;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -158,22 +174,84 @@ body {
 }
 
 .container {
-    max-width: 1200px;
+    grid-column: span 2;
+    width: 85%;
+    height: 85vh;
     margin: 50px auto;
     padding: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid #2F1B41;
     border-radius: 10px;
-    background-color: #fff;
+    background-color: #2F1B41;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.checkpoint {
-    margin: 50px auto;
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns, one for the container and one for the image */
+    grid-column-gap: 20px; /* Adjust the gap between the columns */
 }
 
+.get-started-content {
+    flex: 2;
+}
+
+.image-container {
+    grid-column: span 1;
+}
+
+/* Additional styles for responsiveness */
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: 1fr; /* On smaller screens, make it a single column layout */
+    }
+
+    .image-container {
+        grid-column: 1; /* Center the image in the single column layout */
+    }
+}
+
+.checkpoint {
+    height: 5vh;
+}
+
+#loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    z-index: 1000; /* Ensure it's above other content */
+    display: none; /* Initially hidden */
+}
+
+.loader {
+    border: 16px solid #f3f3f3; /* Light gray border */
+    border-top: 16px solid #3498db; /* Blue border for the loader */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite; /* Spin animation */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -60px; /* Half of the loader height */
+    margin-left: -60px; /* Half of the loader width */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
 .footer {
-    background-color: #333;
-    color: #fff;
-    padding: 20px 0;
-    text-align: center;
+    display: block;
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  position: static;
+  text-align: center;
+  bottom: 0;
+  width: 100%;
 }
