@@ -7,15 +7,15 @@ html {
 h1, h2, h3 {
     font-size: 2em;
   margin: 0.67em 0;
-    text-align: center;
+    /*text-align: center;*/
     color: #8a94a7;
 }
 
 body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        margin: 0;
+        margin: 0px 20px 0px 20px;
         padding: 0;
-        background-color: #2F1B41;
+        background-color: #333;
         color: #333;
 }
 
@@ -77,10 +77,14 @@ body {
 .hero-content {
     max-width: 45%;
     text-align: left;
+    align-content: flex-start;
     z-index: 1;
     display: flex;
-    flex-direction: column;
     justify-content: center;
+  align-items: center;
+    flex-direction: column;
+    /*padding-top: 15%;*/
+    /*justify-content: center;*/
     height: 100%;
     padding-right: 50px; /* Adjust as needed */
 }
@@ -90,6 +94,7 @@ body {
     line-height: 1.3;
     margin-bottom: 20px;
     margin-top: 0; /* Remove top margin */
+    text-align: left;
 }
 
 .get-started-btn {
@@ -213,37 +218,6 @@ body {
 .checkpoint {
     height: 5vh;
 }
-
-#loading-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    z-index: 1000; /* Ensure it's above other content */
-    display: none; /* Initially hidden */
-}
-
-.loader {
-    border: 16px solid #f3f3f3; /* Light gray border */
-    border-top: 16px solid #3498db; /* Blue border for the loader */
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    animation: spin 2s linear infinite; /* Spin animation */
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: -60px; /* Half of the loader height */
-    margin-left: -60px; /* Half of the loader width */
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
 
 .footer {
     display: block;

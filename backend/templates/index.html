@@ -9,6 +9,7 @@
     <link href="{{ url_for('static', path='styles/bg.css') }}" rel="stylesheet">
 </head>
 <body>
+
 <header class="navbar">
     <nav>
         <ul>
@@ -25,6 +26,7 @@
         <h1>Know Better: A very convenient way to query things you didn't know you could query!</h1>
         <button class="get-started-btn" onclick="scrollToContainer()">Get Started</button>
     </div>
+
     <img class="hero-img" src="{{ url_for('static', path='/assets/happyTeam.jpeg')}}" alt="Hero Image">
 </section>
 
@@ -90,6 +92,10 @@
 </footer>
 
 <script>
+    document.addEventListener("DOMContentLoaded", () => {
+    const loadingOverlay = document.getElementById('loading-overlay');
+    loadingOverlay.style.display = 'none'; // Show loading overlay
+  });
     function scrollToContainer() {
         document.getElementById('checkpoint').scrollIntoView({ behavior: 'smooth' });
     }

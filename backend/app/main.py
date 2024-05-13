@@ -6,9 +6,9 @@ from starlette.middleware.sessions import SessionMiddleware
 from starlette.responses import RedirectResponse
 from authlib.integrations.starlette_client import OAuth, OAuthError
 
-from download.youtube import process_audio
-from download.website import process_link
-from download.document import process_document
+from backend.download.youtube import process_audio
+from backend.download.website import process_link
+from backend.download.document import process_document
 from .models import UserMessage, Option
 from config import CLIENT_ID, CLIENT_SECRET
 
@@ -46,7 +46,7 @@ def index(request: Request):
     if user:
         return RedirectResponse("welcome")
 
-    return templates.TemplateResponse(name="login.html", context={"request": request})
+    return templates.TemplateResponse(name="signin.html", context={"request": request})
 
 
 @app.get("/welcome")
@@ -76,7 +76,7 @@ async def auth(request: Request):
     user = token.get("userinfo")
     if user:
         request.session["user"] = dict(user)
-    return RedirectResponse("welcome")
+    return RedirectResponse("http://localhost:3000/home")
 
 
 @app.get("/logout")
